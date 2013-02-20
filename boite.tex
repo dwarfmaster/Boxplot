@@ -9,45 +9,16 @@
 
 \usetikzlibrary{calc}
 
-\title{Boite à moustache}
-\author{Chabassier Luc}
-
-\begin{document}
-\maketitle
-
-Valeurs : \\
-\begin{center}
-	\begin{tabular}{|c|c|}
-		\hline
-		\textbf{Xi} & \textbf{Ni} \\
-		\hline
-		5 & 47 \\
-		\hline
-		15 & 85 \\
-		\hline
-		25 & 101 \\
-		\hline
-		40 & 142 \\
-		\hline
-		65 & 84 \\
-		\hline
-		100 & 31 \\
-		\hline
-	\end{tabular}
-\end{center}
-
-% On considère une boite telle que min = 0, q1 = 25, q2 = 30, q3 = 50, max = 100
-Boite à moustaches : \\
-\begin{center}
+\newcommand\boxplot[7]{
 	\begin{tikzpicture}
 		% Les paramètres
-		\pgfmathsetmacro\min{10};
-		\pgfmathsetmacro\qone{20};
-		\pgfmathsetmacro\qtwo{25};
-		\pgfmathsetmacro\qthree{40};
-		\pgfmathsetmacro\max{60};
-		\pgfmathsetmacro\scale{0.2};
-		\pgfmathsetmacro\offset{5};
+		\pgfmathsetmacro\min{#1};
+		\pgfmathsetmacro\qone{#2};
+		\pgfmathsetmacro\qtwo{#3};
+		\pgfmathsetmacro\qthree{#4};
+		\pgfmathsetmacro\max{#5};
+		\pgfmathsetmacro\scale{#6};
+		\pgfmathsetmacro\offset{#7};
 
 		% Valeurs pour l'affichage de ces nombres
 		\pgfmathtruncatemacro\vmin{\min};
@@ -90,8 +61,41 @@ Boite à moustaches : \\
 		\foreach \x in {\minp,\offp,...,\maxp} {
 			\pgfmathtruncatemacro\abs{(\x / \scale) + 0.1} % Le + 0.1 est pour absorber les imprécisions
 			\draw (\x,-0.9) -- (\x, -1.1)
-				node[below] {\abs};
+			node[below] {\abs};
 		}
 	\end{tikzpicture}
+}
+
+\title{Boite à moustache}
+\author{Chabassier Luc}
+
+\begin{document}
+\maketitle
+
+Valeurs : \\
+\begin{center}
+	\begin{tabular}{|c|c|}
+		\hline
+		\textbf{Xi} & \textbf{Ni} \\
+		\hline
+		5 & 47 \\
+		\hline
+		15 & 85 \\
+		\hline
+		25 & 101 \\
+		\hline
+		40 & 142 \\
+		\hline
+		65 & 84 \\
+		\hline
+		100 & 31 \\
+		\hline
+	\end{tabular}
+\end{center}
+
+% On considère une boite telle que min = 0, q1 = 25, q2 = 30, q3 = 50, max = 100
+Boite à moustaches : \\
+\begin{center}
+	\boxplot{10}{20}{25}{40}{60}{0.2}{5}
 \end{center}
 \end{document}
