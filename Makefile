@@ -1,7 +1,7 @@
 all:
-	pdflatex boite.tex
+	pdflatex example.tex
 
 view: all
-	zathura boite.pdf > /dev/null 2>&1
+	zathura example.pdf > /dev/null 2>&1
 
 .PHONY: all view
