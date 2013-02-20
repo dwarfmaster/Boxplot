@@ -72,30 +72,24 @@
 \begin{document}
 \maketitle
 
-Valeurs : \\
-\begin{center}
-	\begin{tabular}{|c|c|}
-		\hline
-		\textbf{Xi} & \textbf{Ni} \\
-		\hline
-		5 & 47 \\
-		\hline
-		15 & 85 \\
-		\hline
-		25 & 101 \\
-		\hline
-		40 & 142 \\
-		\hline
-		65 & 84 \\
-		\hline
-		100 & 31 \\
-		\hline
-	\end{tabular}
-\end{center}
+\begin{figure}[h]
+	\begin{center}
+		\boxplot{0}{30}{50}{60}{100}{0.1}{10}
+	\end{center}
+	\caption{Premier test}
+\end{figure}
 
-% On considère une boite telle que min = 0, q1 = 25, q2 = 30, q3 = 50, max = 100
-Boite à moustaches : \\
-\begin{center}
-	\boxplot{10}{20}{25}{40}{60}{0.2}{5}
-\end{center}
+\begin{figure}[h]
+	\begin{center}
+		\boxplot{10}{20}{25}{40}{60}{0.2}{5}
+	\end{center}
+	\caption{Second test}
+\end{figure}
+
+\begin{figure}[h]
+	\begin{center}
+		\boxplot{-50}{-8}{20}{34}{48}{0.1}{7}
+	\end{center}
+	\caption{Troisième test}
+\end{figure}
 \end{document}
