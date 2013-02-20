@@ -1,0 +1,65 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{boxplot}
+
+\RequirePackage{tikz}
+\RequirePackage{pgfplots}
+\usetikzlibrary{calc}
+
+\newcommand\boxplot[7]{
+	\begin{tikzpicture}
+		% Les paramètres
+		\pgfmathsetmacro\min{#1};
+		\pgfmathsetmacro\qone{#2};
+		\pgfmathsetmacro\qtwo{#3};
+		\pgfmathsetmacro\qthree{#4};
+		\pgfmathsetmacro\max{#5};
+		\pgfmathsetmacro\scale{#6};
+		\pgfmathsetmacro\offset{#7};
+
+		% Valeurs pour l'affichage de ces nombres
+		\pgfmathtruncatemacro\vmin{\min};
+		\pgfmathtruncatemacro\vqone{\qone};
+		\pgfmathtruncatemacro\vqtwo{\qtwo};
+		\pgfmathtruncatemacro\vqthree{\qthree};
+		\pgfmathtruncatemacro\vmax{\max};
+
+		% Les valeurs utiles
+		\pgfmathsetmacro\minp{\min * \scale};
+		\pgfmathsetmacro\qonep{\qone * \scale};
+		\pgfmathsetmacro\qtwop{\qtwo * \scale};
+		\pgfmathsetmacro\qthreep{\qthree * \scale};
+		\pgfmathsetmacro\maxp{\max * \scale};
+
+		% La boite
+		\draw[very thick] (\minp,0.5) -- (\qonep,0.5);
+		\draw[very thick] (\qthreep,0.5) -- (\maxp,0.5);
+		\draw[very thick] (\qonep,0) -- (\qthreep,0);
+		\draw[very thick] (\qonep,1) -- (\qthreep,1);
+		\draw[very thick] (\minp,0) -- (\minp,1) node[red,above] {\vmin};
+		\draw[very thick] (\qonep,0) -- (\qonep,1) node[red,above] {\vqone};
+		\draw[very thick] (\qtwop,0) -- (\qtwop,1) node[red,above] {\vqtwo};
+		\draw[very thick] (\qthreep,0) -- (\qthreep,1) node[red,above] {\vqthree};
+		\draw[very thick] (\maxp,0) -- (\maxp,1) node[red,above] {\vmax};
+
+		% Les aides à visualiser
+		\draw[red,thick] (\minp,-1) -- (\minp,0);
+		\draw[red,thick] (\qonep,-1) -- (\qonep,0);
+		\draw[red,thick] (\qtwop,-1) -- (\qtwop,0);
+		\draw[red,thick] (\qthreep,-1) -- (\qthreep,0);
+		\draw[red,thick] (\maxp,-1) -- (\maxp,0);
+
+		% L'axe
+		\pgfmathsetmacro\mina{\minp - \offset * \scale};
+		\pgfmathsetmacro\maxa{\maxp + \offset * \scale};
+		\draw[->] (\mina,-1) -- (\maxa,-1);
+
+		\pgfmathsetmacro\offp{\minp + \scale * \offset}
+		\foreach \x in {\minp,\offp,...,\maxp} {
+			\pgfmathtruncatemacro\abs{(\x / \scale) + 0.1} % Le + 0.1 est pour absorber les imprécisions
+			\draw (\x,-0.9) -- (\x, -1.1)
+			node[below] {\abs};
+		}
+	\end{tikzpicture}
+}
+
+
